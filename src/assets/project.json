@@ -1,0 +1,13 @@
+{
+    "name": "@lanaqi/autox-typescript-template",
+    "versionName": "0.0.1",
+    "versionCode": 1,
+    "packageName": "com.lanaqi.autox.template",
+    "main": "main.js",
+    "launchConfig": {
+        "hideLogs": false
+    },
+    "assets": [
+        "key/*"
+    ]
+}

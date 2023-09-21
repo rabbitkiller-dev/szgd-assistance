@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "ES2015"
+    ],
+    "allowJs": true,
+    "checkJs": false,
+    "importHelpers": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "alwaysStrict": false,
+    "noImplicitReturns": true,
+    "allowUmdGlobalAccess": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": false, // 注意：不支持该配置
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {},
+    "types": [
+      "node",
+      "./types/index.d.ts"
+    ],
+  },
+  "include": [
+    "./src/**/*",
+    "./lib/**/*"
+  ],
+  "exclude": [
+    "./.vscode/",
+    "./build/",
+    "./dist/",
+    "./types/",
+    "./src/assets/",
+    "./src/statics/"
+  ],
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compileOnSave": true
+}
