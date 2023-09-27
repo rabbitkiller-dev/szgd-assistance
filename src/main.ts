@@ -1,4 +1,6 @@
 //安卓版本高于Android 9
+import { auto_use_skill } from './auto_use_skill';
+
 if (device.sdkInt > 28) {
   //等待截屏权限申请并同意
   threads.start(function () {
@@ -81,7 +83,7 @@ async function testClickCraft() {
   const flag = await makeCraft('手艺品_大猫修补锤');
 }
 try {
-  // findCraft('手艺品_壹型熔炉石').then((expandPoint)=>{
+  // findCraft('手艺品_青铜包边').then((expandPoint)=>{
   //   let startMake = false;
   //   if (expandPoint) {
   //     console.log(`找到手艺品: 手艺品_壹型熔炉石`);
@@ -89,6 +91,8 @@ try {
   //   }
   // })
   // console.show();
+  // threads.start(auto_use_skill);
+
   autoCollection().then();
 
 
