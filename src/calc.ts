@@ -2,7 +2,7 @@
  * 材料计算器
  */
 
-import { CraftKeys, CraftMaterialKeys, Keys } from './utils';
+import { CraftKeys, CraftMaterialKeys, Keys } from './constant';
 
 /**
  * 配方(固定)
