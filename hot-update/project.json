@@ -1,0 +1,13 @@
+{
+    "name": "szgd-assistance-hot-update",
+    "versionName": "0.0.1",
+    "versionCode": 1,
+    "packageName": "com.lanaqi.autox.template",
+    "main": "hot_update.js",
+    "launchConfig": {
+        "hideLogs": false
+    },
+    "assets": [
+        "key/*"
+    ]
+}

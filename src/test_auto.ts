@@ -154,13 +154,12 @@ const queues4: Array<ActionQueue> = [
 // 3. 所有步骤尝试等待重新执行
 // 4. 向下翻找极限值, 几个屏幕范围, 没有找到就回到最上面, 在找一次, 还找不到就跳过
 
-
-export async function autoCollection(): Promise<void> {
+export async function autoCollection(queues: Array<ActionQueue>): Promise<void> {
   let num = 1;
   while (num < 20) {
     console.log(`第${num++}次采集`);
 
-    for (const action of queues4) {
+    for (const action of queues) {
       if (action.type === 'collection') {
         console.log('采集');
         await startCollection(action.materials);

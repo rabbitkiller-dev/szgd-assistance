@@ -21,7 +21,7 @@ export async function auto_use_skill() {
       console.log(`[自动使用手艺技能] 第一步: 识别技能图标`);
       const currentScreen = images.captureScreen();
       const colling = Utils.getKeysSync(['主界面_采集助手'], (keys) => {
-        return images.findImage(images.captureScreen(), keys['主界面_采集助手'], {threshold: 0.5})
+        return images.findImage(currentScreen, keys['主界面_采集助手'], {threshold: 0.5})
       });
       // 如果找到采集助手, 说明正在采集, 可以使用技能
       if (colling) {
