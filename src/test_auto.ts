@@ -97,41 +97,6 @@ const queues2: Array<ActionQueue> = [
   },
 ];
 
-// 队列任务
-const queues3: Array<ActionQueue> = [
-  {
-    type: 'collection',
-    materials: [
-      {key: '手艺材料_翠晶石', num: 0},
-      {key: '手艺材料_红乔木', num: 0},
-      {key: '手艺材料_钴铁矿', num: 0},
-      {key: '手艺材料_紫杉木', num: 0},
-    ],
-  },
-  {
-    type: 'make',
-    materials: [
-      {key: '手艺品_青翠矿镐箱', num: 0},
-      {key: '手艺品_青翠剪刀箱', num: 0},
-    ]
-  },
-  {
-    type: 'collection',
-    materials: [
-      {key: '手艺材料_翠晶石', num: 0},
-      {key: '手艺材料_红乔木', num: 0},
-      {key: '手艺材料_钴铁矿', num: 0},
-      {key: '手艺材料_白云石', num: 0},
-    ],
-  },
-  {
-    type: 'make',
-    materials: [
-      {key: '手艺品_青翠手斧箱', num: 0},
-      {key: '手艺品_青翠钓竿箱', num: 0},
-    ]
-  },
-];
 
 // 队列任务
 const queues4: Array<ActionQueue> = [
@@ -207,7 +172,7 @@ export async function autoCollection(queues: Array<ActionQueue>): Promise<void> 
  */
 export async function startCollection(materials: Array<{ key: Keys, num: number }>): Promise<void> {
   // 打开手艺界面
-  openCraft();
+  await openCraft();
   // 点击采集 打开采集界面
   console.log('点击采集');
   const collBtn = images.findImage(images.captureScreen(), Utils.getKey('手艺_采集_未激活'));
@@ -326,7 +291,7 @@ export async function findMaterial(key: Keys): Promise<Point | undefined> {
       Utils.getKeysSync([key], (result) => {
         obj = images.findImage(images.captureScreen(), result[key], {threshold: 0.96});
         console.log(`寻找目标材料: ${key}, ${obj}`);
-      })
+      });
       if (obj) {
         resolve(obj);
         return;
@@ -421,7 +386,7 @@ async function getCurrentStatus(): Promise<'CollectionCompleted' | 'Collectionin
  */
 export async function startMake(materials: Array<{ key: Keys, num: number }>): Promise<void> {
   // 打开手艺界面
-  openCraft();
+  await openCraft();
 
   for (const material of materials) {
     await makeCraft(material.key);
@@ -469,7 +434,7 @@ export async function makeCraft(key: Keys): Promise<boolean> {
 export async function findCraft(key: Keys): Promise<Point> {
   return new Promise((resolve, reject) => {
     function loop() {
-      const expandPoint = images.findImage(images.captureScreen(), Utils.getKey(key), {threshold: 0.97 });
+      const expandPoint = images.findImage(images.captureScreen(), Utils.getKey(key), {threshold: 0.97});
       if (expandPoint) {
         resolve(expandPoint);
         return;
@@ -511,9 +476,9 @@ export function waitMake(): Promise<boolean> {
 /**
  * 打开手艺界面
  */
-export function openCraft() {
+export async function openCraft() {
   // 手艺按钮在主界面收起菜单中, 先展开
-  MainUtils.expand();
+  await MainUtils.expandCraft();
   // 点击手艺
   console.log('打开手艺界面');
   const currentScreen = images.captureScreen();
@@ -526,17 +491,25 @@ export function openCraft() {
  * 主界面类
  */
 export class MainUtils {
-  static expand() {
-    // 点击手艺
-    const expandPoint = images.findImage(images.captureScreen(), Utils.getKey('主界面_收起'), {threshold: 0.5});
-    if (expandPoint) {
-      click(expandPoint.x, expandPoint.y);
-      sleep(1000);
-      return;
+  static waitMain() {
+
+  }
+
+  static async expandCraft(): Promise<boolean> {
+    // 循环找到手艺按钮
+    while (true) {
+      // 点击手艺
+      const expandPoint = images.findImage(images.captureScreen(), Utils.getKey('主界面_收起'), {threshold: 0.5});
+      if (expandPoint) {
+        click(expandPoint.x, expandPoint.y);
+        sleep(1000);
+      }
+      const craftPoint = images.findImage(images.captureScreen(), Utils.getKey('手艺'), {threshold: 0.5});
+      if (craftPoint) {
+        return true;
+      }
+      await new Promise(resolve => setTimeout(resolve, 1000)).then();
     }
-    const craftPoint = images.findImage(images.captureScreen(), Utils.getKey('手艺'), {threshold: 0.5});
-    if (!craftPoint) {
-      throw new Error('找不到手艺按钮, 有可能不在主界面');
-    }
+
   }
 }
