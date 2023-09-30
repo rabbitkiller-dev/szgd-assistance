@@ -440,6 +440,7 @@ export async function findCraft(key: Keys): Promise<Point> {
         return;
       }
       swipe(600, 800, 600, 500, 1200);
+      sleep(1000);
       setTimeout(() => {
         loop();
       }, 1000);

@@ -67,33 +67,29 @@ autoMask.click(function () {
       {
         type: 'collection',
         materials: [
-          {key: '手艺材料_翠晶石', num: 0},
-          {key: '手艺材料_红乔木', num: 0},
-          {key: '手艺材料_钴铁矿', num: 0},
-          {key: '手艺材料_紫杉木', num: 0},
+          {key: '手艺材料_韧性树脂', num: 0},
+          {key: '手艺材料_耐火粘土', num: 0},
         ],
       },
       {
         type: 'make',
         materials: [
-          {key: '手艺品_青翠矿镐箱', num: 0},
-          {key: '手艺品_青翠剪刀箱', num: 0},
+          {key: '手艺品_灵翠矿镐箱', num: 0},
+          {key: '手艺品_灵翠剪刀箱', num: 0},
         ]
       },
       {
         type: 'collection',
         materials: [
-          {key: '手艺材料_翠晶石', num: 0},
-          {key: '手艺材料_红乔木', num: 0},
-          {key: '手艺材料_钴铁矿', num: 0},
-          {key: '手艺材料_白云石', num: 0},
+          {key: '手艺材料_韧性树脂', num: 0},
+          {key: '手艺材料_耐火粘土', num: 0},
         ],
       },
       {
         type: 'make',
         materials: [
-          {key: '手艺品_青翠手斧箱', num: 0},
-          {key: '手艺品_青翠钓竿箱', num: 0},
+          {key: '手艺品_灵翠手斧箱', num: 0},
+          {key: '手艺品_灵翠钓竿箱', num: 0},
         ]
       },
     ];
