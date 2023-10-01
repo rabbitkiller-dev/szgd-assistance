@@ -297,8 +297,8 @@ export async function findMaterial(key: Keys): Promise<Point | undefined> {
         return;
       }
       // 没有找到的时候, 向下滑动
-      swipe(590, 800, 650, 600, 1200);
-      sleep(1000);
+      swipe(590, 800, 650, 600, 1000);
+      sleep(1500);
       swipeIndex++;
       setTimeout(() => {
         if (loopIndex == 2) {
@@ -431,17 +431,46 @@ export async function makeCraft(key: Keys): Promise<boolean> {
  * 找到目标手艺品
  * @param key
  */
-export async function findCraft(key: Keys): Promise<Point> {
+let findCraftLoopIndex = 0;
+let findCraftSwipeIndex = 0;
+export async function findCraft(key: Keys): Promise<Point | undefined> {
+  function reset(num: number) {
+    let i = 0;
+    while (i < num) {
+      i++;
+      swipe(600, 610, 650, 800, 500);
+    }
+  }
+  findCraftLoopIndex = 0;
+  if (findCraftSwipeIndex !== 0) {
+    reset(findCraftSwipeIndex + 1);
+  }
   return new Promise((resolve, reject) => {
     function loop() {
-      const expandPoint = images.findImage(images.captureScreen(), Utils.getKey(key), {threshold: 0.97});
-      if (expandPoint) {
-        resolve(expandPoint);
+      let obj: Point | undefined;
+      Utils.getKeysSync([key], (result) => {
+        obj = images.findImage(images.captureScreen(), result[key], {threshold: 0.97});
+        console.log(`寻找目标手艺品: ${key}, ${obj}`);
+      });
+      if (obj) {
+        resolve(obj);
         return;
       }
-      swipe(600, 800, 600, 500, 1200);
-      sleep(1000);
+      // 没有找到的时候, 向下滑动
+      swipe(600, 800, 650, 610, 1000);
+      sleep(1500);
+      findCraftSwipeIndex++;
       setTimeout(() => {
+        if (findCraftLoopIndex == 2) {
+          resolve(undefined);
+          return;
+        }
+        if (findCraftSwipeIndex === 7) {
+          reset(8);
+          findCraftLoopIndex++;
+          findCraftSwipeIndex = 0;
+        }
+        // 继续滑动
         loop();
       }, 1000);
     }
