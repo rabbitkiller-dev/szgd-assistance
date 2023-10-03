@@ -1,7 +1,9 @@
 {
-  "name": "@lanaqi/autox-typescript-template",
+  "name": "@rabbit/szgd-assistance",
   "version": "0.0.1-alpha.1",
   "scripts": {
+    "build:hotupdate": "tsc hot-update/hot_update.ts --outDir dist/hot-update",
+    "watch:hotupdate": "tsc hot-update/hot_update.ts --outDir dist/hot-update --watch",
     "build:dev": "tsup --env.NODE_ENV=development",
     "build:prod": "tsup --env.NODE_ENV=production",
     "rerun:dev": "tsup --env.NODE_ENV=development --env.DEPLOY_ACTION=rerun",

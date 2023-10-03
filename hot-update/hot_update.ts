@@ -3,12 +3,13 @@
  */
 interface ReleasesDetailVO {
   url: string;
+  tag_name: string;
   assets: ReleasesDetailAssetsVO[];
 }
 
 interface ReleasesDetailAssetsVO {
   name: string;
-  url: string;
+  browser_download_url: string;
 }
 
 const LAST_RELEASE_ID_FILE_PATH = `${files.cwd()}/szgd-assistance/.last_release_id`;
@@ -17,19 +18,25 @@ const LAST_RELEASE_ID_FILE_PATH = `${files.cwd()}/szgd-assistance/.last_release_
  * 进行热更新/下载
  */
 function hotUpdate() {
+  // 先判断是否有文件
+  if (!files.isFile(LAST_RELEASE_ID_FILE_PATH)) {
+    toast('初次使用, 开始安装脚本');
+  }
   const needUpdate = checkUpdate();
   if (!needUpdate) {
     console.log('无需更新');
     return;
   }
-  console.log('开始更新');
   // 先从github releases获取最新的版本信息
-  // const result = http.get('https://api.github.com/repos/rabbitkiller-dev/szgd-assistance/releases/latest');
-  // const releasesDetailVO: ReleasesDetailVO = result.body.json();
-  // const assets = releasesDetailVO.assets[0];
-  // if (assets) {
-  //
-  // }
+  const result = http.get('https://api.github.com/repos/rabbitkiller-dev/szgd-assistance/releases/latest');
+  const releasesDetailVO: ReleasesDetailVO = result.body.json();
+  const assets = releasesDetailVO.assets[0];
+
+  toast(`脚本有更新. 正在更新版本为: ${releasesDetailVO.tag_name}`);
+  if (assets) {
+    console.log(assets);
+    downloadFile(assets.browser_download_url);
+  }
 }
 
 /**
@@ -51,3 +58,41 @@ function checkUpdate(): boolean {
   }
   return false;
 }
+
+function downloadFile(url: string) {
+  toastLog('开始下载');
+  const response = http.get(url);
+  const zipFile = response.body.bytes();
+  const filepath = `${files.cwd()}/szgd-assistance.zip`;
+  const folderPath = `${files.cwd()}`;
+  // path= /storage/emulated/0/脚本/zip文件专用/test.zip
+  files.writeBytes(filepath, zipFile);
+  toastLog('下载完成');
+  toastLog('开始解压');
+  switch (zips.X(filepath, folderPath)) {
+    case 0:
+      toastLog("解压缩成功！请到 " + folderPath + " 目录下查看。")
+      break;
+    case 1:
+      toastLog("压缩结束，存在非致命错误（例如某些文件正在被使用，没有被压缩）")
+      break;
+    case 2:
+      toastLog("致命错误")
+      break;
+    case 7:
+      toastLog("命令行错误")
+      break;
+    case 8:
+      toastLog("没有足够内存")
+      break;
+    case 255:
+      toastLog("用户中止操作")
+      break;
+    default: toastLog("未知错误")
+  }
+  console.log(folderPath);
+  return folderPath;
+}
+
+hotUpdate();
+
