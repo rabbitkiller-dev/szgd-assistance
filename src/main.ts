@@ -103,8 +103,13 @@ const autoUseSkill = ui.findView('autoUseSkill');
 // 工匠的自动采集
 autoUseSkill.click(function () {
   threads.start(function () {
+    if (!app.launchApp('森之国度')) {
+      toast('启动森之国度失败');
+    }
     // 队列任务
     auto_use_skill();
+    setInterval(function () {
+    }, 1000);
   });
 });
 // try {
@@ -132,3 +137,4 @@ autoUseSkill.click(function () {
 
 setInterval(function () {
 }, 1000);
+
