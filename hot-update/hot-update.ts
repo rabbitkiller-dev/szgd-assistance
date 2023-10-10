@@ -28,13 +28,20 @@ function hotUpdate() {
     return;
   }
   // 先从github releases获取最新的版本信息
-  const result = http.get('https://api.github.com/repos/rabbitkiller-dev/szgd-assistance/releases/latest');
-  const releasesDetailVO: ReleasesDetailVO = result.body.json();
-  const assets = releasesDetailVO.assets[0];
+  const result = http.get('https://gitee.com/api/v5/repos/rabbitkiller/szgd-assistance/releases/latest');
+  const releasesDetailVO = result.body.json() as ReleasesDetailVO;
+  const assets = releasesDetailVO.assets.find(asset => asset.name === 'szgd-assistance.7z');
 
   toast(`脚本有更新. 正在更新版本为: ${releasesDetailVO.tag_name}`);
   if (assets) {
     console.log(assets);
+    // 存在文件, 先删除
+    if (files.isFile(`${files.cwd()}/szgd-assistance.7z`)) {
+      files.remove(`${files.cwd()}/szgd-assistance.7z`);
+    }
+    if (files.isDir(`${files.cwd()}/szgd-assistance`)) {
+      files.removeDir(`${files.cwd()}/szgd-assistance`);
+    }
     downloadFile(assets.browser_download_url);
   }
 }
@@ -44,7 +51,7 @@ function hotUpdate() {
  * 通过比较release资源id来判断, 每次更新信息都在szgd-assistance目录中
  */
 function checkUpdate(): boolean {
-  const result = http.get('https://api.github.com/repos/rabbitkiller-dev/szgd-assistance/releases/latest');
+  const result = http.get('https://gitee.com/api/v5/repos/rabbitkiller/szgd-assistance/releases/latest');
   const releasesDetailVO: ReleasesDetailVO = result.body.json();
   const assets = releasesDetailVO.assets[0];
   // 先判断是否有文件
@@ -63,9 +70,8 @@ function downloadFile(url: string) {
   toastLog('开始下载');
   const response = http.get(url);
   const zipFile = response.body.bytes();
-  const filepath = `${files.cwd()}/szgd-assistance.zip`;
+  const filepath = `${files.cwd()}/szgd-assistance.7z`;
   const folderPath = `${files.cwd()}`;
-  // path= /storage/emulated/0/脚本/zip文件专用/test.zip
   files.writeBytes(filepath, zipFile);
   toastLog('下载完成');
   toastLog('开始解压');
