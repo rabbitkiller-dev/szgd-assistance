@@ -37,6 +37,15 @@ export class Utils {
   /**
    * 获取所有的key, 并执行回调. 在回调结束后, 会释放所有的key
    */
+  static getKeySync<R>(key: Keys, callback: (image: Image) => R): R {
+    const image = Utils.getKey(key)
+    const result = callback(image);
+    image.recycle();
+    return result;
+  }
+  /**
+   * 获取所有的key, 并执行回调. 在回调结束后, 会释放所有的key
+   */
   static getKeysSync<T extends Keys[], R>(keys: T, callback: (images: Record<T[number], Image>) => R): R {
     const images: Record<T[number], Image> = {} as any;
     for (const key of keys) {
@@ -47,6 +56,27 @@ export class Utils {
       images[key].recycle();
     }
     return result;
+  }
+
+  static waitKeyPoint(key: Keys): Point | undefined {
+    const point = Utils.getKeySync(key, (image) => {
+      return Utils.waitFindImagePoint(image);
+    });
+    return point;
+  }
+
+  /**
+   * 查找图片位置并且等待
+   * timeout: 秒
+   */
+  static waitFindImagePoint(template: Image, options?: { threshold?: number, timeout: number }) {
+    const currentTime = new Date().getTime();
+    const currentScreen = images.captureScreen();
+    const point = images.findImage(currentScreen, template, { threshold: 0.5 });
+    if (point) {
+      return point;
+    }
+    return point;
   }
 }
 

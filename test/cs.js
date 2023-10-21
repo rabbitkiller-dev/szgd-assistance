@@ -1,12 +1,15 @@
-import * as mainTest from './main-test';
+function testOne() {
+  console.time('截图一次');
+  images.captureScreen();
+  console.timeEnd('截图一次');
+}
 
 //等待截屏权限申请并同意
-threads.start(function () {
-  if (!images.requestScreenCapture(true)) {
-    toast('请求截图失败');
-    exit();
-  }
-});
+
+if (!images.requestScreenCapture(true)) {
+  toast('请求截图失败');
+  exit();
+}
 //等待截屏权限申请并同意
 threads.start(function () {
   //安卓版本高于Android 9
@@ -16,7 +19,5 @@ threads.start(function () {
   }
 });
 
-
-setTimeout(async () => {
-  await mainTest.run();
-}, 3000)
+sleep(3000)
+testOne();

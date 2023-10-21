@@ -2,14 +2,15 @@ import { Keys, Utils } from './utils';
 import { CraftSkillKeys } from './constant';
 
 const skills: CraftSkillKeys[] = [
+  '手艺技能_幸运附体_紫1',
+  '手艺技能_幸运附体_蓝1',
   '手艺技能_丰收强化_金1',
   '手艺技能_丰收强化_紫1',
   '手艺技能_丰收_紫1',
-  '手艺技能_幸运附体_紫1',
-  '手艺技能_幸运附体_蓝1',
   '手艺技能_丰收强化_蓝1',
   '手艺技能_零耗_蓝1',
   '手艺技能_加速_蓝1',
+  '手艺技能_瞬采_金1',
 ];
 /**
  * 自动使用手艺技能
@@ -30,7 +31,7 @@ export async function auto_use_skill() {
       console.log(`[自动使用手艺技能] 第一步: 识别技能图标`);
       const currentScreen = images.captureScreen();
       const colling = Utils.getKeysSync(['主界面_采集助手'], (keys) => {
-        return images.findImage(currentScreen, keys['主界面_采集助手'], {threshold: 0.5})
+        return images.findImage(currentScreen, keys['主界面_采集助手'], { threshold: 0.5 })
       });
       // 如果找到采集助手, 说明正在采集, 可以使用技能
       if (colling) {

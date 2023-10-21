@@ -1,3 +1,7 @@
+链接：https://pan.baidu.com/s/1SPhHm3xCrnPKw9GGtiP6-w?pwd=csmr
+提取码：csmr
+--来自百度网盘超级会员V3的分享
+
 # 开始
 
 1. PC中下载两个软件

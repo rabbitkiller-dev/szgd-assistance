@@ -37,30 +37,30 @@ const queues: Array<ActionQueue> = [
   {
     type: 'collection',
     materials: [
-      {key: '手艺材料_白云石', num: 0},
-      {key: '手艺材料_铁矿石', num: 0},
-      {key: '手艺材料_紫杉木', num: 0},
-      {key: '手艺材料_树脂', num: 0},
+      { key: '手艺材料_白云石', num: 0 },
+      { key: '手艺材料_铁矿石', num: 0 },
+      { key: '手艺材料_紫杉木', num: 0 },
+      { key: '手艺材料_树脂', num: 0 },
     ],
   },
   {
     type: 'make',
     materials: [
-      {key: '手艺品_强韧钓竿箱', num: 0},
+      { key: '手艺品_强韧钓竿箱', num: 0 },
     ]
   },
   {
     type: 'collection',
     materials: [
-      {key: '手艺材料_紫杉木', num: 0},
-      {key: '手艺材料_粘土', num: 0},
-      {key: '手艺材料_树脂', num: 0},
+      { key: '手艺材料_紫杉木', num: 0 },
+      { key: '手艺材料_粘土', num: 0 },
+      { key: '手艺材料_树脂', num: 0 },
     ],
   },
   {
     type: 'make',
     materials: [
-      {key: '手艺品_强韧手斧箱', num: 0},
+      { key: '手艺品_强韧手斧箱', num: 0 },
     ]
   },
 ];
@@ -70,29 +70,29 @@ const queues2: Array<ActionQueue> = [
   {
     type: 'collection',
     materials: [
-      {key: '手艺材料_粘土', num: 0},
-      {key: '手艺材料_白云石', num: 0},
-      {key: '手艺材料_铁矿石', num: 0},
-      {key: '手艺材料_紫杉木', num: 0},
+      { key: '手艺材料_粘土', num: 0 },
+      { key: '手艺材料_白云石', num: 0 },
+      { key: '手艺材料_铁矿石', num: 0 },
+      { key: '手艺材料_紫杉木', num: 0 },
     ],
   },
   {
     type: 'make',
     materials: [
-      {key: '手艺品_强韧矿镐箱', num: 0},
+      { key: '手艺品_强韧矿镐箱', num: 0 },
     ]
   },
   {
     type: 'collection',
     materials: [
-      {key: '手艺材料_树脂', num: 0},
-      {key: '手艺材料_紫杉木', num: 0},
+      { key: '手艺材料_树脂', num: 0 },
+      { key: '手艺材料_紫杉木', num: 0 },
     ],
   },
   {
     type: 'make',
     materials: [
-      {key: '手艺品_强韧手斧箱', num: 0},
+      { key: '手艺品_强韧手斧箱', num: 0 },
     ]
   },
 ];
@@ -103,13 +103,13 @@ const queues4: Array<ActionQueue> = [
   {
     type: 'collection',
     materials: [
-      {key: '手艺材料_翠晶石', num: 0},
+      { key: '手艺材料_翠晶石', num: 0 },
     ],
   },
   {
     type: 'make',
     materials: [
-      {key: '手艺品_青铜包边', num: 0},
+      { key: '手艺品_青铜包边', num: 0 },
     ]
   },
 ];
@@ -189,14 +189,14 @@ export async function startCollection(materials: Array<{ key: Keys, num: number 
    */
   function plan1() {
     swipe(600, 800, 600, 680, 1000);
-    const obj = images.findImage(images.captureScreen(), Utils.getKey('手艺材料_紫杉木'), {threshold: 0.6});
+    const obj = images.findImage(images.captureScreen(), Utils.getKey('手艺材料_紫杉木'), { threshold: 0.6 });
     click(obj.x, obj.y);
     sleep(1000);
     const confirmPoint = images.findImage(images.captureScreen(), Utils.getKey('手艺_采集_采集助手_选择数量'));
     // 点击确定(确认位置不会变)
     click(confirmPoint.x, confirmPoint.y);
     sleep(1000);
-    const obj2 = images.findImage(images.captureScreen(), Utils.getKey('手艺材料_铁矿石'), {threshold: 0.6});
+    const obj2 = images.findImage(images.captureScreen(), Utils.getKey('手艺材料_铁矿石'), { threshold: 0.6 });
     click(obj2.x, obj2.y);
     sleep(1000);
     const confirmPoint2 = images.findImage(images.captureScreen(), Utils.getKey('手艺_采集_采集助手_选择数量'));
@@ -210,7 +210,7 @@ export async function startCollection(materials: Array<{ key: Keys, num: number 
    */
   function plan2() {
     swipe(600, 800, 600, 680, 1000);
-    const obj2 = images.findImage(images.captureScreen(), Utils.getKey('手艺材料_白云石'), {threshold: 0.6});
+    const obj2 = images.findImage(images.captureScreen(), Utils.getKey('手艺材料_白云石'), { threshold: 0.6 });
     click(obj2.x, obj2.y);
     console.log('选择: 手艺材料_白云石');
     sleep(1000);
@@ -225,21 +225,19 @@ export async function startCollection(materials: Array<{ key: Keys, num: number 
    */
   function plan3() {
     console.log('选择: 手艺材料_树脂');
-    const obj2 = images.findImage(images.captureScreen(), Utils.getKey('手艺材料_树脂'), {threshold: 0.6});
+    const obj2 = images.findImage(images.captureScreen(), Utils.getKey('手艺材料_树脂'), { threshold: 0.6 });
     click(obj2.x, obj2.y);
     sleep(1000);
     const confirmPoint = images.findImage(images.captureScreen(), Utils.getKey('手艺_采集_采集助手_选择数量'));
     // 点击确定(确认位置不会变)
     click(confirmPoint.x, confirmPoint.y);
     sleep(1000);
-    const point = images.findImage(images.captureScreen(), Utils.getKey('手艺材料_粘土'), {threshold: 0.6});
+    const point = images.findImage(images.captureScreen(), Utils.getKey('手艺材料_粘土'), { threshold: 0.6 });
     click(point.x, point.y);
     sleep(1000);
     click(confirmPoint.x, confirmPoint.y);
     sleep(1000);
   }
-
-  let confirmPoint: Point | undefined;
 
   // 选择材料
   for (const material of materials) {
@@ -249,13 +247,14 @@ export async function startCollection(materials: Array<{ key: Keys, num: number 
       continue;
     }
     click(obj.x, obj.y);
-    sleep(800);
-    if (!confirmPoint) {
-      confirmPoint = images.findImage(images.captureScreen(), Utils.getKey('手艺_采集_采集助手_选择数量'));
+    sleep(1000);
+
+    let confirmPoint = images.findImage(images.captureScreen(), Utils.getKey('手艺_采集_采集助手_选择数量'));
+    if (confirmPoint) {
+      // 点击确定(确认位置不会变)
+      click(confirmPoint.x, confirmPoint.y);
     }
-    // 点击确定(确认位置不会变)
-    click(confirmPoint.x, confirmPoint.y);
-    sleep(800);
+    sleep(1000);
   }
 
   // 开始采集
@@ -289,7 +288,7 @@ export async function findMaterial(key: Keys): Promise<Point | undefined> {
     function loop() {
       let obj: Point | undefined;
       Utils.getKeysSync([key], (result) => {
-        obj = images.findImage(images.captureScreen(), result[key], {threshold: 0.96});
+        obj = images.findImage(images.captureScreen(), result[key], { threshold: 0.98 });
         console.log(`寻找目标材料: ${key}, ${obj}`);
       });
       if (obj) {
@@ -298,7 +297,7 @@ export async function findMaterial(key: Keys): Promise<Point | undefined> {
       }
       // 没有找到的时候, 向下滑动
       swipe(590, 800, 650, 600, 1000);
-      sleep(1500);
+      sleep(2000);
       swipeIndex++;
       setTimeout(() => {
         if (loopIndex == 2) {
@@ -365,7 +364,7 @@ async function getCurrentStatus(): Promise<'CollectionCompleted' | 'Collectionin
   //   return 'CollectionCompleted';
   // }
   // 如果找不到完成按钮，说明正在采集
-  if (images.findImage(currentScreen, Utils.getKey('主界面_采集助手'), {threshold: 0.5})) {
+  if (images.findImage(currentScreen, Utils.getKey('主界面_采集助手'), { threshold: 0.5 })) {
     // const currentScreen = images.captureScreen();
     const skills: Keys[] = ['手艺技能_丰收强化_金1', '手艺技能_丰收强化_紫1', '手艺技能_幸运附体_紫1', '手艺技能_幸运附体_蓝1', '手艺技能_丰收强化_蓝1', '手艺技能_零耗_蓝1'];
     for (const skill of skills) {
@@ -438,7 +437,7 @@ export async function findCraft(key: Keys): Promise<Point | undefined> {
     let i = 0;
     while (i < num) {
       i++;
-      swipe(600, 610, 650, 800, 500);
+      swipe(600, 450, 650, 800, 500);
     }
   }
   findCraftLoopIndex = 0;
@@ -449,16 +448,20 @@ export async function findCraft(key: Keys): Promise<Point | undefined> {
     function loop() {
       let obj: Point | undefined;
       Utils.getKeysSync([key], (result) => {
-        obj = images.findImage(images.captureScreen(), result[key], {threshold: 0.97});
+        obj = images.findImage(images.captureScreen(), result[key], { threshold: 0.975 });
         console.log(`寻找目标手艺品: ${key}, ${obj}`);
+        if (!obj) {
+          sleep(1000);
+          obj = images.findImage(images.captureScreen(), result[key], { threshold: 0.975 });
+        }
       });
       if (obj) {
         resolve(obj);
         return;
       }
       // 没有找到的时候, 向下滑动
-      swipe(600, 800, 650, 610, 1000);
-      sleep(1500);
+      swipe(600, 800, 650, 450, 1000);
+      sleep(2500);
       findCraftSwipeIndex++;
       setTimeout(() => {
         if (findCraftLoopIndex == 2) {
@@ -512,9 +515,9 @@ export async function openCraft() {
   // 点击手艺
   console.log('打开手艺界面');
   const currentScreen = images.captureScreen();
-  const expandPoint = images.findImage(currentScreen, Utils.getKey('手艺'), {threshold: 0.5});
+  const expandPoint = images.findImage(currentScreen, Utils.getKey('手艺'), { threshold: 0.5 });
   click(expandPoint.x, expandPoint.y);
-  sleep(1000);
+  sleep(2000);
 }
 
 /**
@@ -529,12 +532,12 @@ export class MainUtils {
     // 循环找到手艺按钮
     while (true) {
       // 点击手艺
-      const expandPoint = images.findImage(images.captureScreen(), Utils.getKey('主界面_收起'), {threshold: 0.5});
+      const expandPoint = images.findImage(images.captureScreen(), Utils.getKey('主界面_收起'), { threshold: 0.5 });
       if (expandPoint) {
         click(expandPoint.x, expandPoint.y);
         sleep(1000);
       }
-      const craftPoint = images.findImage(images.captureScreen(), Utils.getKey('手艺'), {threshold: 0.5});
+      const craftPoint = images.findImage(images.captureScreen(), Utils.getKey('手艺'), { threshold: 0.5 });
       if (craftPoint) {
         return true;
       }
